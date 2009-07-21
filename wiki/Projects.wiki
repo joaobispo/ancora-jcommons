@@ -1,0 +1,9 @@
+#summary Description of the projects in this repository.
+
+= SimplePrints =
+
+Lightweight methods for output and formatting of messages.
+
+= SimpleIo =
+
+Lightweight methods for quick file access and manipulation.
