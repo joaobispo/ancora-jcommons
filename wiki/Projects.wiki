@@ -4,6 +4,6 @@
 
 Lightweight methods for output and formatting of messages.
 
-= SimpleIo =
+= SimpleIO =
 
 Lightweight methods for quick file access and manipulation.
