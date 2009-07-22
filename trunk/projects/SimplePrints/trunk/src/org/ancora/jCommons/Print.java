@@ -36,30 +36,22 @@ public class Print {
    }
 
    /**
-    * Prints the contents of "message" to the error output,
+    * Prints the contents of "message" to the standard output,
     * prefixed by the string "***".
     *
     * @param message Message to be printed
     */
    public static void warn(String message) {
-      System.err.println(prefixWarn+message);
+      System.out.println(prefixWarn+message);
    }
 
-   /**
-    * Prints the contents of "message" to the error output, prefixed by an
-    * amount of whitespaces. Its purpose is to show additional information
-    * after using "warn"
-    */
-   public static void warnMore(String message) {
-       System.err.println(tab+message);
-   }
 
    /**
     * Prints the contents of "message" to the standard output, prefixed by an
     * amount of whitespaces. Its purpose is to show additional information
-    * after using "info"
+    * after using "info" or "warn".
     */
-   public static void infoMore(String message) {
+   public static void more(String message) {
        System.out.println(tab+message);
    }
 
