@@ -6,7 +6,7 @@ None
 
 == Changes ==
 
-- Now all methods report to System.out, instead of System.out or System.err.
+- Now all methods report to System.out, instead of System.out or System.err ([http://stackoverflow.com/questions/1049795/whats-wrong-with-using-system-err-in-java ref]). 
 
 == New ==
 
