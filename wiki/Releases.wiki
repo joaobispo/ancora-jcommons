@@ -1,3 +1,25 @@
+= SimplePrints 1.1 (Snapshot 20090722) =
+
+==Dependencies==
+
+None
+
+== Changes ==
+
+- Now all methods report to System.out, instead of System.out or System.err.
+
+== New ==
+
+Class Print:
+- method "more".
+
+== Removed == 
+
+Class Print:
+
+- method "warnMore" e "infoMore".
+
+
 = SimplePrints 1.0 (Snapshot 20090721) =
 
 ==Dependencies==
@@ -7,5 +29,3 @@ None
 ==New==
 
 - Class Print with static methods for standard output of information and warning messages, to replace calls to System.out and System.err.
-
-`[`Download Link`]`
