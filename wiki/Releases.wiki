@@ -6,12 +6,12 @@ None
 
 == Changed ==
 
-  *Class Print is now in package "org.ancora.jCommons.console"
+  * Class Print is now in package "org.ancora.jCommons.console"
 
 == New ==
 
-  *Interface Console.
-  *Class DefaultConsole.
+  * Interface Console.
+  * Class DefaultConsole.
 
 
 = SimplePrints 1.1 (Snapshot 20090722) =
@@ -22,18 +22,18 @@ None
 
 == Changes ==
 
-- Now all methods report to System.out, instead of System.out or System.err ([http://stackoverflow.com/questions/1049795/whats-wrong-with-using-system-err-in-java ref]). 
+  * Now all methods report to System.out, instead of System.out or System.err ([http://stackoverflow.com/questions/1049795/whats-wrong-with-using-system-err-in-java ref]). 
 
 == New ==
 
 Class Print:
-- method "more".
+  * method "more".
 
 == Removed == 
 
 Class Print:
 
-- method "warnMore" e "infoMore".
+  * method "warnMore" e "infoMore".
 
 
 = SimplePrints 1.0 (Snapshot 20090721) =
@@ -44,4 +44,4 @@ None
 
 ==New==
 
-- Class Print with static methods for standard output of information and warning messages, to replace calls to System.out and System.err.
+  * Class Print with static methods for standard output of information and warning messages, to replace calls to System.out and System.err.
