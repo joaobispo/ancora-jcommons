@@ -69,7 +69,7 @@ public class DefaultConsole implements Console {
     *
     * @return an instance of DefaultConsole
     */
-   public DefaultConsole getConsole() {
+   public static DefaultConsole getConsole() {
       return defaultConsole;
    }
 
