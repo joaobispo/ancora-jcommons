@@ -59,9 +59,9 @@ public class SimpleIOAdhocTests {
     private static void testRead() {
         String filepath;
 
-        //filepath = "C:/autoexec.bat";
+        filepath = "C:/autoexec.bat";
         //filepath = "C:/bootmgr";
-        filepath = "C:/updatedatfix.log";
+        //filepath = "C:/updatedatfix.log";
         //filepath = "C:/java/updatedatfix-test.log";
 
         File file = Io.safeFile(filepath);

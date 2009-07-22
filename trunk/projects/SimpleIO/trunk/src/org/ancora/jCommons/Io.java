@@ -55,7 +55,7 @@ public class Io {
         // quickly found where the null argument was used.
         /*
         if(folderpath == null) {
-            Print.warn("safeFolder: input String is null.");
+            print.warn("safeFolder: input String is null.");
             return null;
         }
          */
@@ -72,7 +72,7 @@ public class Io {
         // Check if File exists. If true, is not a folder.
         final boolean folderExists = folder.exists();
         if(folderExists) {
-            Print.warn("safeFolder: path \""+folderpath+"\" exists, but " +
+            print.warn("safeFolder: path \""+folderpath+"\" exists, but " +
                     "doesn't represent a folder.");
             return null;
         }
@@ -80,12 +80,12 @@ public class Io {
         // Try to create folder.
         final boolean folderCreated = folder.mkdirs();
         if(folderCreated) {
-            Print.info("Created folder \""+folder.getAbsolutePath()+"\".");
+            print.info("Created folder \""+folder.getAbsolutePath()+"\".");
             return folder;
         }
 
         // Couldn't create folder
-        Print.warn("safeFolder: path \""+folderpath+"\" doesn't exist and " +
+        print.warn("safeFolder: path \""+folderpath+"\" doesn't exist and " +
                 "couldn't be created.");
         return null;
     }
@@ -115,13 +115,13 @@ public class Io {
         // Check if File exists. If true, is not a file.
         final boolean fileExists = file.exists();
         if(fileExists) {
-            Print.warn("safeFile: path \""+filepath+"\" exists, but " +
+            print.warn("safeFile: path \""+filepath+"\" exists, but " +
                     "doesn't represent a file.");
             return null;
         }
 
         // File doesn't exist
-        Print.warn("safeFile: path \""+filepath+"\" doesn't exist.");
+        print.warn("safeFile: path \""+filepath+"\" doesn't exist.");
         return null;
     }
 
@@ -145,14 +145,14 @@ public class Io {
         // Check if the folder exists
         final boolean folderExists = folder.exists();
         if(!folderExists) {
-            Print.warn("safeFile: path to folder \""+folder.getAbsolutePath()+
+            print.warn("safeFile: path to folder \""+folder.getAbsolutePath()+
                     "\" doesn't exist.");
         }
 
         // Check if the folder is valid
         final boolean isFolderValid = folder.isDirectory();
         if(!isFolderValid) {
-            Print.warn("safeFile: path to folder \""+folder.getAbsolutePath()+
+            print.warn("safeFile: path to folder \""+folder.getAbsolutePath()+
                     "\" exists, but isn't a folder.");
             return null;
         }
@@ -177,13 +177,13 @@ public class Io {
 
         final boolean fileExists = file.exists();
         if (!fileExists) {
-            Print.warn("read: path \"" + file.getAbsolutePath() + "\" doesn't " + "exist.");
+            print.warn("read: path \"" + file.getAbsolutePath() + "\" doesn't " + "exist.");
             return "";
         }
 
         final boolean isFileValid = file.isFile();
         if (!isFileValid) {
-            Print.warn("read: path \"" + file.getAbsolutePath() + "\" exists, " + "but isn't a file.");
+            print.warn("read: path \"" + file.getAbsolutePath() + "\" exists, " + "but isn't a file.");
             return "";
         }
 
@@ -196,13 +196,17 @@ public class Io {
             fileReader = new FileReader(file);
             final BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            // Read first character
-            int intChar = (char)bufferedReader.read();
-
+            // Read first character. It can't be cast to "char", otherwise the
+            // -1 will be converted in a character.
+            // First test for -1, then cast.
+            int intChar = bufferedReader.read();
+            System.out.println("intChar first:"+intChar);
             while(intChar != -1) {
+               System.out.println("intChar inside loop:"+intChar);
                 char character = (char) intChar;
                 stringBuilder.append(character);
                 intChar = bufferedReader.read();
+                System.out.println("intChar after read:"+intChar);
             }
 
         } catch (FileNotFoundException ex) {
@@ -217,10 +221,53 @@ public class Io {
             }
         }
 
-        Print.info("File size:"+fileSize);
-        Print.info("Builder size:"+stringBuilder.length());
+        print.info("File size:"+fileSize);
+        print.info("Builder size:"+stringBuilder.length());
         return stringBuilder.toString();
     }
 
-    
+    // SETTINGS
+    final static private Print print = new Print();
+
+    /**
+     * Class for formating the output messages to the console.
+     */
+   private static class Print {
+
+      /**
+       * Prints the contents of "message" to the standard output,
+       * prefixed by the string "Info:".
+       *
+       * @param message Message to be printed
+       */
+      public void info(String message) {
+         System.out.println(prefixInfo + message);
+      }
+
+      /**
+       * Prints the contents of "message" to the standard output,
+       * prefixed by the string "***".
+       *
+       * @param message Message to be printed
+       */
+      public void warn(String message) {
+         System.out.println(prefixWarn + message);
+      }
+
+      /**
+       * Prints the contents of "message" to the standard output, prefixed by an
+       * amount of whitespaces. Its purpose is to show additional information
+       * after using "info" or "warn".
+       */
+      public void more(String message) {
+         System.out.println(tab + message);
+      }
+      // DEFINITIONS
+      //Text that appears before a warning message.
+      private static final String prefixWarn = "***";
+      //Text that appears before an information message.
+      private static final String prefixInfo = "Info:";
+      // Whitespace for the beginning of paragraphs.
+      private static final String tab = "    ";
+   }
 }
