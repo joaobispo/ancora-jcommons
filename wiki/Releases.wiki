@@ -6,12 +6,12 @@ None
 
 == Changed ==
 
-- Class Print is now in package "org.ancora.jCommons.console"
+  *Class Print is now in package "org.ancora.jCommons.console"
 
 == New ==
 
-- Interface Console.
-- Class DefaultConsole.
+  *Interface Console.
+  *Class DefaultConsole.
 
 
 = SimplePrints 1.1 (Snapshot 20090722) =
