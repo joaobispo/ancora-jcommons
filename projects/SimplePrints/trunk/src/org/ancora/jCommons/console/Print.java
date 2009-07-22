@@ -15,11 +15,11 @@
  *  under the License.
  */
 
-package org.ancora.jCommons;
+package org.ancora.jCommons.console;
 
 /**
  * Static methods for standard output of information and warning messages. 
- * Used instead of calls to System.out and System.err.
+ * Used instead of calls to System.out.
  *
  * @author Joao Bispo
  */
