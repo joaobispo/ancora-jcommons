@@ -32,12 +32,13 @@ public class DiskAdhocTests {
 
 
         //testSafeFile();
-        testSafeFile2Args();
+        //testSafeFile2Args();
+        testRead();
 
     }
 
    private static void testSafeFile() {
-      Disk disk = new Disk();
+      Disk disk = Disk.getDisk();
 
       String filepath = "C:/newFile.txt";
 
@@ -47,14 +48,34 @@ public class DiskAdhocTests {
    }
 
    private static void testSafeFile2Args() {
-      Disk disk = new Disk();
+      Disk disk = Disk.getDisk();
 
-      String filepath = "newFile.txt";
-      String folderpath = "C:/newFolder/newFolder2/";
+      String filepath = "C:/newFile.txt";
+      String folderpath = "C:/newFolder/newFolder2";
 
       File folder = new File(folderpath);
 
       File file = disk.safeFile(folder, filepath);
       System.out.println("Path: "+file.getAbsolutePath());
    }
+
+    private static void testRead() {
+        Disk disk = Disk.getDisk();
+        String filepath;
+        File file;
+
+        //filepath = "C:/newFile.txt";
+        //filepath = "C:/fileC:/file";
+        filepath = "C:/autoexec.bat";
+
+        //file = disk.safeFile(filepath);
+        file = new File(filepath);
+
+        //file.delete();
+
+        String contents = disk.read(file);
+
+        System.out.println("Contents:");
+        System.out.println("\""+contents+"\"");
+    }
 }

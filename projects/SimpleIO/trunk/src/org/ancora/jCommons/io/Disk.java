@@ -44,12 +44,25 @@ public class Disk {
       this.console = console;
    }
 
+
    /**
-    * Create a Disk with default formatting of messages.
+    * Creates a Disk with default formatting of messages.
+    *
+    * @return a default disk.
     */
-   public Disk() {
-      this.console = DefaultConsole.getConsole();
-   }
+    private static Disk defaultDisk() {
+        Console defaultConsole = DefaultConsole.getConsole();
+        return new Disk(defaultConsole);
+    }
+
+    /**
+     * Returns a Disk with default formatting of messages.
+     *
+     * @return a Disk with default formatting of messages.
+     */
+    public static Disk getDisk() {
+        return defaultDisk;
+    }
 
 
 
@@ -158,7 +171,7 @@ public class Disk {
        } catch (IOException ex) {
           console.warn("safeFile: IOException while trying to create file! " +
                   "(" + file.getAbsolutePath() + ")");
-          Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);          
           return null;
        }
 
@@ -213,23 +226,32 @@ public class Disk {
      */
     public String read(File file) {
 
-        final boolean fileExists = file.exists();
+        // Check if path exists
+        final boolean fileExists = file.exists();        
         if (!fileExists) {
             console.warn("read: path \"" + file.getAbsolutePath() + "\" doesn't " + "exist.");
             return "";
         }
 
+        // Path exists. Check if path is a file
         final boolean isFileValid = file.isFile();
         if (!isFileValid) {
             console.warn("read: path \"" + file.getAbsolutePath() + "\" exists, " + "but isn't a file.");
             return "";
         }
-
-
+         
+        // File exists. Check size
         final long fileSize = file.length();
-        final StringBuilder stringBuilder = new StringBuilder((int) fileSize);
-        FileReader fileReader = null;
+        if(fileSize == 0) {
+            console.info("Reading empty file ("+file.getAbsolutePath()+").");
+            return "";
+        }
 
+        // File has size greater than 0. Create StringBuilder with size of file
+        final StringBuilder stringBuilder = new StringBuilder((int) fileSize);
+
+        // Try to read the contents of the file into the StringBuilder
+        FileReader fileReader = null;
         try {
             fileReader = new FileReader(file);
             final BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -245,22 +267,31 @@ public class Disk {
             }
 
         } catch (FileNotFoundException ex) {
+            console.warn("read: FileNotFoundException while trying to read " +
+                    "file! (" + file.getAbsolutePath() + ")");
             Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
         } catch (IOException ex) {
+            console.warn("read: IOException while trying to read " +
+                    "file! (" + file.getAbsolutePath() + ")");
             Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
         } finally {
             try {
                 fileReader.close();
             } catch (IOException ex) {
+                console.warn("read: IOException while trying to close the " +
+                        "fileReader! (" + file.getAbsolutePath() + ")");
                 Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+                return "";
             }
         }
 
-        // Checking if StringBuffer is equal to original file
+        // Checking if size of StringBuffer is equal to size of original file
         final int builderSize = stringBuilder.length();
         final boolean sameSize = fileSize == builderSize;
         if(!sameSize) {
-           console.warn("read: Size of original file ("+fileSize+") is " +
+           console.info("Size of original file ("+fileSize+") is " +
                    "different from size of loaded String ("+builderSize+").");
 
         }
@@ -271,5 +302,7 @@ public class Disk {
     // INSTANCE VARIABLES
     // Message Output
     final private Console console;
+    // Static Disk with default messages.
+    final private static Disk defaultDisk = defaultDisk();
 
 }
