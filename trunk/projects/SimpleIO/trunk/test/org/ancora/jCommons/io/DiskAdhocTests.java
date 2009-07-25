@@ -17,6 +17,7 @@
 
 package org.ancora.jCommons.io;
 
+import org.ancora.jCommons.Disk;
 import java.io.File;
 
 /**
