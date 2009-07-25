@@ -15,7 +15,7 @@
  *  under the License.
  */
 
-package org.ancora.jCommons.io;
+package org.ancora.jCommons;
 
 import org.ancora.jCommons.Disk;
 import java.io.File;
@@ -34,7 +34,8 @@ public class DiskAdhocTests {
 
         //testSafeFile();
         //testSafeFile2Args();
-        testRead();
+        //testRead();
+        testWrite();
 
     }
 
@@ -78,5 +79,36 @@ public class DiskAdhocTests {
 
         System.out.println("Contents:");
         System.out.println("\""+contents+"\"");
+    }
+
+    private static void testWrite() {
+        Disk disk = Disk.getDisk();
+        String filepath;
+        File file;
+        String contents;
+
+        //filepath = "C:/newFile.txt";
+        //filepath = "C:/fileC:/file";
+        filepath = "C:/test.txt";
+
+        file = disk.safeFile(filepath);
+        //file = new File(filepath);
+
+        //file.delete();
+        /*
+        int numChars = 100000;
+        StringBuilder builder = new StringBuilder(numChars);
+        for(int i=0; i<numChars; i++) {
+            builder.append("a");
+        }
+*/
+
+        contents = "1234";
+        //contents = builder.toString();
+
+        disk.write(file, contents);
+        
+        //System.out.println("Contents:");
+        //System.out.println("\""+contents+"\"");
     }
 }

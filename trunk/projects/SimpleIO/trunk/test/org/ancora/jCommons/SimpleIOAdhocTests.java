@@ -40,7 +40,7 @@ public class SimpleIOAdhocTests {
     private static void testSafeFolder() {
         // Program should fail with a NullPointerException
         //Io.safeFolder(null);
-        Io.safeFolder("C:/autoexec.bat");
+        //Io.safeFolder("C:/autoexec.bat");
     }
 
     private static void testSafeFile() {
@@ -53,7 +53,7 @@ public class SimpleIOAdhocTests {
         filename = "";
         //filename = "autoexec.bat";
         
-        Io.safeFile(folder, filename);
+        //Io.safeFile(folder, filename);
     }
 
     private static void testRead() {
@@ -64,8 +64,8 @@ public class SimpleIOAdhocTests {
         //filepath = "C:/updatedatfix.log";
         //filepath = "C:/java/updatedatfix-test.log";
 
-        File file = Io.safeFile(filepath);
-        System.out.println(Io.read(file));
+        //File file = Io.safeFile(filepath);
+        //System.out.println(Io.read(file));
     }
 
 }
