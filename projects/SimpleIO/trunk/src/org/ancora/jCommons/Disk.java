@@ -21,11 +21,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.ancora.jCommons.console.Console;
-import org.ancora.jCommons.console.DefaultConsole;
 
 /**
  * Methods for quick and simple manipulation of files, folders and other
@@ -114,7 +113,7 @@ public class Disk {
         // Try to create folder.
         final boolean folderCreated = folder.mkdirs();
         if(folderCreated) {
-            console.info("Created folder \""+folder.getAbsolutePath()+"\".");
+            console.info("Folder created ("+folder.getAbsolutePath()+").");
             return folder;
         }
 
@@ -122,6 +121,41 @@ public class Disk {
         console.warn("safeFolder: path \""+folderpath+"\" doesn't exist and " +
                 "couldn't be created.");
         return null;
+    }
+
+
+    /**
+     * Given a File representing a folder, and a String representing the name
+     * of another folder inside the previous folder, returns a File object
+     * representing the complete folder. It follows the contiditions:
+     * <p>If the folder inside the first folder exists, a File with its path is
+     * returned;
+     * <br>If the folder doesn't exist, an attempt is made to create the folder
+     * and all the needed folders. If unsucessful, null is returned.
+     * <br>If the complete folderpath exists, but doesn't represent a folder,
+     * null is returned;
+     *
+     * @param folder File representing a folder.
+     * @param filename name of a file inside the folder.
+     * @return if the file exists, a File object representing the file.
+     * Null otherwise.
+     */
+    public File safeFolder(File folder, String foldername) {
+       // Check if the folder exists and is a folder. If it doesn't, create it.
+       final boolean isFolder = folder.isDirectory();
+       if(!isFolder) {
+          folder = safeFolder(folder.getAbsolutePath());
+          // No need to return messages, safeFolder will indicate what error
+          // occurred.
+          if(folder == null) {
+             return null;
+          }
+       }
+
+        // Build the complete folder
+        String folderpath = folder.getAbsolutePath() + File.separator +
+                foldername;
+        return safeFile(folderpath);
     }
 
 
@@ -161,11 +195,11 @@ public class Disk {
        try {
           final boolean fileCreated = file.createNewFile();
           if (fileCreated) {
-             console.info("Created file \"" + file.getAbsolutePath() + "\".");
+             console.info("File created (" + file.getAbsolutePath() + ").");
              return file;
           } else {
-             console.info("File \"" + file.getAbsolutePath() + "\" " +
-                     "could not be created.");
+             console.info("File could not be created (" + file.getAbsolutePath()
+                     + ").");
              return null;
           }
        } catch (IOException ex) {
@@ -297,6 +331,88 @@ public class Disk {
         }
 
         return stringBuilder.toString();
+    }
+
+
+    /**
+     * Given a File representing an existing file and a String, writes the
+     * contents of the String in the file, overwritting everything that was
+     * previously in the file. It follows the contiditions:
+     *
+     * <p>If the File object doesn't exist or doesn't represent a file, nothing
+     * is written;
+     *
+     * @param file File object representing an existing file.
+     * @param contents The contents to write.
+     */
+    public void write(File file, String contents) {
+        write(file, contents, false);
+    }
+
+
+    /**
+     * Given a File representing an existing file and a String, writes the
+     * contents of the String at the end of the file. 
+     * It follows the contiditions:
+     *
+     * <p>If the File object doesn't exist or doesn't represent a file, nothing
+     * is written;
+     *
+     * @param file File object representing an existing file.
+     * @param contents The contents to write.
+     */
+    public void append(File file, String contents) {
+        write(file, contents, true);
+    }
+
+    /**
+     * Given a File representing an existing file and a String, writes the
+     * contents of the String in the file.If the second argument is true,
+     * then bytes will be written to the end of the file rather than
+     * the beginning. It follows the contiditions:
+     *
+     * <p>If the File object doesn't exist or doesn't represent a file, nothing
+     * is written;
+     *
+     * @param file File object representing an existing file.
+     * @param contents The contents to write.
+     * @param append if true, then bytes will be written to the end of the
+     * file rather than the beginning.
+     */
+    private void write(File file, String contents, boolean append) {
+        // Check if path exists
+        final boolean fileExists = file.exists();
+        if (!fileExists) {
+            console.warn("write: path \"" + file.getAbsolutePath() + "\" " +
+                    "doesn't " + "exist.");
+            return;
+        }
+
+        // Path exists. Check if path is a file
+        final boolean isFileValid = file.isFile();
+        if (!isFileValid) {
+            console.warn("read: path \"" + file.getAbsolutePath() + "\" " +
+                    "exists, but isn't a file.");
+            return;
+        }
+
+        // File exists. Try to write it
+        try {
+            FileWriter fileWriter = new FileWriter(file, append);
+            fileWriter.write(contents);
+            fileWriter.close();
+            // Inform about the operation
+            if(append) {
+               console.info("File appended ("+file.getAbsolutePath()+").");
+            } else {
+                console.info("File written ("+file.getAbsolutePath()+").");
+            }
+
+        } catch (IOException ex) {
+            console.warn("write: IOException while trying to use the " +
+                        "fileWriter! (" + file.getAbsolutePath() + ")");
+            Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // INSTANCE VARIABLES
