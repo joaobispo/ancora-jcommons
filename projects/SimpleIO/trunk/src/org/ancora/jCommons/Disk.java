@@ -15,7 +15,7 @@
  *  under the License.
  */
 
-package org.ancora.jCommons.io;
+package org.ancora.jCommons;
 
 import java.io.BufferedReader;
 import java.io.File;
