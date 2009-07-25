@@ -15,7 +15,7 @@
  *  under the License.
  */
 
-package org.ancora.jCommons.console;
+package org.ancora.jCommons;
 
 /**
  * Methods for standard output of information and warning messages.
