@@ -136,7 +136,7 @@ public class Disk {
      * null is returned;
      *
      * @param folder File representing a folder.
-     * @param filename name of a file inside the folder.
+     * @param foldername name of a file inside the folder.
      * @return if the file exists, a File object representing the file.
      * Null otherwise.
      */
