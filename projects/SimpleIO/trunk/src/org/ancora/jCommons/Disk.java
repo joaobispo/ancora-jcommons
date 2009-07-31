@@ -18,11 +18,15 @@
 package org.ancora.jCommons;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -284,11 +288,16 @@ public class Disk {
         // File has size greater than 0. Create StringBuilder with size of file
         final StringBuilder stringBuilder = new StringBuilder((int) fileSize);
 
+        // Try to open the file
+
+
+         FileInputStream stream = null;
+         InputStreamReader streamReader = null;
         // Try to read the contents of the file into the StringBuilder
-        FileReader fileReader = null;
         try {
-            fileReader = new FileReader(file);
-            final BufferedReader bufferedReader = new BufferedReader(fileReader);
+            stream = new FileInputStream(file);
+            streamReader = new InputStreamReader(stream, charSet);
+            final BufferedReader bufferedReader = new BufferedReader(streamReader);
 
             // Read first character. It can't be cast to "char", otherwise the
             // -1 will be converted in a character.
@@ -310,25 +319,29 @@ public class Disk {
                     "file! (" + file.getAbsolutePath() + ")");
             Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
             return "";
-        } finally {
+        }
+        
+        finally {        
             try {
-                fileReader.close();
+                streamReader.close();
             } catch (IOException ex) {
                 console.warn("read: IOException while trying to close the " +
-                        "fileReader! (" + file.getAbsolutePath() + ")");
+                        "streamReader! (" + file.getAbsolutePath() + ")");
                 Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
                 return "";
             }
+             
         }
+         
 
         // Checking if size of StringBuffer is equal to size of original file
-        final int builderSize = stringBuilder.length();
-        final boolean sameSize = fileSize == builderSize;
-        if(!sameSize) {
-           console.info("Size of original file ("+fileSize+") is " +
-                   "different from size of loaded String ("+builderSize+").");
-
-        }
+        //final int builderSize = stringBuilder.length();
+        //final boolean sameSize = fileSize == builderSize;
+        //if(!sameSize) {
+        //   console.info("Size of original file ("+fileSize+") is " +
+        //           "different from size of loaded String ("+builderSize+").");
+        //
+        //}
 
         return stringBuilder.toString();
     }
@@ -396,11 +409,15 @@ public class Disk {
             return;
         }
 
+         FileOutputStream stream = null;
+         OutputStreamWriter streamWriter = null;
         // File exists. Try to write it
         try {
-            FileWriter fileWriter = new FileWriter(file, append);
-            fileWriter.write(contents);
-            fileWriter.close();
+            stream = new FileOutputStream(file, append);
+            streamWriter = new OutputStreamWriter(stream, charSet);
+            final BufferedWriter writer = new BufferedWriter(streamWriter);
+            writer.write(contents, 0, contents.length());
+            writer.close();
             // Inform about the operation
             if(append) {
                console.info("File appended ("+file.getAbsolutePath()+").");
@@ -410,7 +427,7 @@ public class Disk {
 
         } catch (IOException ex) {
             console.warn("write: IOException while trying to use the " +
-                        "fileWriter! (" + file.getAbsolutePath() + ")");
+                        "writers! (" + file.getAbsolutePath() + ")");
             Logger.getLogger(Disk.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -420,5 +437,8 @@ public class Disk {
     final private Console console;
     // Static Disk with default messages.
     final private static Disk defaultDisk = defaultDisk();
+
+    // DEFINITIONS
+    final String charSet = "UTF-8";
 
 }

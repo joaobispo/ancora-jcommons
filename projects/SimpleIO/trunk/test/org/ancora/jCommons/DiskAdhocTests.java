@@ -68,7 +68,8 @@ public class DiskAdhocTests {
 
         //filepath = "C:/newFile.txt";
         //filepath = "C:/fileC:/file";
-        filepath = "C:/autoexec.bat";
+        //filepath = "C:/autoexec.bat";
+        filepath = "C:/swlist.reg";
 
         //file = disk.safeFile(filepath);
         file = new File(filepath);
