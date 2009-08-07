@@ -19,8 +19,6 @@ package org.ancora.jCommons;
 
 import java.io.File;
 
-// TODO: Replace "\n" for
-
 /**
  *
  * @author Joao Bispo
@@ -50,7 +48,7 @@ public class FileConsole implements Console {
     }
 
     public void print(String message) {
-        System.out.println(message);
+        builder.append(message+NEWLINE);
     }
 
     /**
