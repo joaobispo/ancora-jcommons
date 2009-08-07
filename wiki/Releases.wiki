@@ -1,3 +1,13 @@
+= SimplePrints 1.5 (Snapshot 20090807-2)  =
+
+==Dependencies== 
+
+SimpleIO-0.1
+
+== New ==
+
+  * Interface Console now supports methods print and close.
+
 = SimplePrints 1.4 (Snapshot 20090807)  =
 
 ==Dependencies== 
