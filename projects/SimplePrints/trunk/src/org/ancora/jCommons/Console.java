@@ -48,4 +48,16 @@ public interface Console {
     */
    public void more(String message);
 
+   /**
+    * Prints the contents of message.
+    *
+    * @param message
+    */
+   public void print(String message);
+
+   /**
+    * For some implementations of Console, prevents loss of data.
+    */
+   public void close();
+
 }

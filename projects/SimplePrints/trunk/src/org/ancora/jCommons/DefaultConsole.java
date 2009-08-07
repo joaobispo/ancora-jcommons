@@ -63,6 +63,14 @@ public class DefaultConsole implements Console {
 
 
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
+
+    public void close() {
+        return;
+    }
 
    /**
     * Returns an instance of DefaultConsole.
@@ -82,5 +90,7 @@ public class DefaultConsole implements Console {
    private static final String tab = "    ";
    // Unique Instance of this class.
    final static private DefaultConsole defaultConsole = new DefaultConsole();
+
+
 
 }
