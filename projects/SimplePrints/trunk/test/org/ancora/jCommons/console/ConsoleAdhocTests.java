@@ -17,6 +17,9 @@
 
 package org.ancora.jCommons.console;
 
+import org.ancora.jCommons.Console;
+import org.ancora.jCommons.DefaultConsole;
+
 /**
  *
  * @author Joao Bispo
