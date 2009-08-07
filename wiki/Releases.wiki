@@ -1,3 +1,14 @@
+= SimplePrints 1.4 (Snapshot 20090807)  =
+
+==Dependencies== 
+
+SimpleIO-0.1
+
+== New ==
+
+  * Class FileConsole, for writing to a file.
+
+
 = SimpleIO 0.1 (Snapshot 20090729)  =
 
 ==Dependencies==
