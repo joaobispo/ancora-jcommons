@@ -49,6 +49,10 @@ public class FileConsole implements Console {
         builder.append(tab+message+NEWLINE);
     }
 
+    public void print(String message) {
+        System.out.println(message);
+    }
+
     /**
      * Closes the console, writing the contents to a file.
      */
