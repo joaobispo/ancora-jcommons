@@ -1,3 +1,13 @@
+= JavaCommons 0.1 (Snapshot 20090911)  =
+
+==Dependencies== 
+
+None
+
+== New ==
+
+  * Merged SimplePrints and SimpleIO into JavaCommons project.
+
 = SimplePrints 1.5 (Snapshot 20090807-2)  =
 
 ==Dependencies== 
