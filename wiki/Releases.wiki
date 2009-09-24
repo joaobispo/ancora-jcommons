@@ -1,3 +1,22 @@
+= JavaCommons 0.2 (Snapshot 20090924)  =
+
+==Dependencies==
+
+None
+
+== Changed ==
+
+  * Disk class is now an utility class with static methods.
+
+== New ==
+
+  * LoggingUtils class with static methods for outputing information. Uses Java's Logger.
+  * DataManagement package with class DataMap for storing data during execution of program.
+
+== Removed ==
+
+  * Console class and related classes. Subtituted by class LoggingUtils and package Logging. 
+
 = JavaCommons 0.1 (Snapshot 20090911)  =
 
 ==Dependencies== 
