@@ -53,7 +53,7 @@ public class StringMap {
    * @param key
    * @param values
    */
-   @SuppressWarnings("static-access")
+   
    public void putStringArray(String key, String[] values) {
       // Transform the array into the internal format of string array:
       // string <separator> string ...
@@ -141,8 +141,7 @@ public class StringMap {
     * @param key a string.
     * @return the string mapped by the key. If no mapping is found, returns an
     * empty string.
-    */
-   @SuppressWarnings("static-access")
+    */   
    public String getString(String key) {
       return database.getString(key);
    }
@@ -152,11 +151,10 @@ public class StringMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param key an enum.
+    * @param key a string.
     * @return a parsed int from the string mapped by the key. If no mapping is
     * found or the value could not be parsed, returns 0.
-    */
-   @SuppressWarnings("static-access")
+    */  
    public int getInteger(String key) {
          String result = database.getString(key);
          if(result == null) {
@@ -175,14 +173,12 @@ public class StringMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
-    * @param key an enum.
+    * @param key a string.
     * @return a parsed string array computed by splitting this string around
     * matches of the given regular expression, and trimming each resulting string.
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
    public String[] getStringArray(String key) {
       String regex = separator;
       String result = database.getString(key);
@@ -202,14 +198,14 @@ public class StringMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param eKey an enum.
+    * @param key a String.
     * @return a parsed boolean array computed by splitting a string around
     * matches of the given regular expression, and trimming each resulting string
     * and converting it to a boolean.
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
+   
    public boolean[] getBooleanArray(String key) {
       // Split the string in smaller strings
       String[] stringBools = getStringArray(key);
@@ -229,15 +225,14 @@ public class StringMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
-    * @param key an enum.
+    * @param key a string.
     * @return a parsed int array computed by splitting this string around
     * matches of the given regular expression, trimming each resulting string and
     * parsing it for an Integer.
     * <br>If no mapping is found or the value could not be parsed,
     * returns an empty array.
     */
-   @SuppressWarnings("static-access")
+   
    public int[] getIntegerArray(String key) {
       // Split the string in smaller strings
       String[] stringInts = getStringArray(key);
@@ -257,14 +252,13 @@ public class StringMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
     * @param key a string.
     * @return a parsed string set computed by splitting this string around
     * matches of the given regular expression.
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
+   
    public Set<String> getStringSet(String key) {
       Set<String> setValue = new HashSet<String>();
       String[] strings = getStringArray(key);
@@ -313,7 +307,7 @@ public class StringMap {
     * @param key
     * @return
     */
-   @SuppressWarnings("static-access")
+   
    private int parseInt(String result, String key) {
       int intResult = 0;
       try {
@@ -335,7 +329,7 @@ public class StringMap {
     * @param key
     * @return
     */
-   @SuppressWarnings("static-access")
+   
    private String[] parseStringArray(String text, String separator, String key) {
       String[] strings = new String[0];
       try {
