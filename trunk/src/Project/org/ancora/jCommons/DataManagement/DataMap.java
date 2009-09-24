@@ -110,11 +110,11 @@ public class DataMap implements ReadOnlyDataMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param key an enum.
+    * @param eKey an enum.
     * @return a parsed int from the string mapped by the key. If no mapping is
     * found or the value could not be parsed, returns 0.
     */
-   @SuppressWarnings("static-access")
+   
    public int getInteger(Enum eKey) {
       return database.getInteger(enumString(eKey));
    }
@@ -127,14 +127,13 @@ public class DataMap implements ReadOnlyDataMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
-    * @param key an enum.
+    * @param eKey an enum.
     * @return a parsed string array computed by splitting this string around
     * matches of the given regular expression, and trimming each resulting string.
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
+   
    public String[] getStringArray(Enum eKey) {
       return database.getStringArray(enumString(eKey));
    }
@@ -152,7 +151,7 @@ public class DataMap implements ReadOnlyDataMap {
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
+   
    public boolean[] getBooleanArray(Enum eKey) {
       return database.getBooleanArray(enumString(eKey));
    }
@@ -163,15 +162,14 @@ public class DataMap implements ReadOnlyDataMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
-    * @param key an enum.
+    * @param eKey an enum.
     * @return a parsed int array computed by splitting this string around
     * matches of the given regular expression, trimming each resulting string and
     * parsing it for an Integer.
     * <br>If no mapping is found or the value could not be parsed,
     * returns an empty array.
     */
-   @SuppressWarnings("static-access")
+   
    public int[] getIntegerArray(Enum eKey) {
       return database.getIntegerArray(enumString(eKey));
    }
@@ -182,14 +180,13 @@ public class DataMap implements ReadOnlyDataMap {
     *
     * <p><b>*Prints Info Messages*</b>
     *
-    * @param regex the delimiting regular expression
-    * @param key a string.
+    * @param eKey a string.
     * @return a parsed string set computed by splitting this string around
     * matches of the given regular expression.
     * If no mapping is found or the value could not be parsed,
     * returns an empty set.
     */
-   @SuppressWarnings("static-access")
+   
    public Set<String> getStringSet(Enum eKey) {
       return database.getStringSet(enumString(eKey));
    }
