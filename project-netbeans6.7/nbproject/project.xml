@@ -5,12 +5,10 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>Java Commons</name>
             <source-roots>
-                <root id="src.SimpleIO.dir" name="SimpleIO"/>
-                <root id="src.SimplePrints.dir" name="SimplePrints"/>
+                <root id="src.Project.dir" name="Source jCommons"/>
             </source-roots>
             <test-roots>
-                <root id="test.SimpleIO.dir" name="Tests SimpleIO"/>
-                <root id="test.SimplePrints.dir" name="Tests SimplePrints"/>
+                <root id="test.Tests.dir" name="Unit Tests"/>
             </test-roots>
         </data>
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
